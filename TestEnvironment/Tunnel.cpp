@@ -6,7 +6,7 @@ Tunnel::Tunnel()
 	, currentRotation(0.f)
 {
 	
-	SetScale(10.f, 10.f, 100.f);
+	SetScale(20.f, 20.f, 100.f);
 }
 
 

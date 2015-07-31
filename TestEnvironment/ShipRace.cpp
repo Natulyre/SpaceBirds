@@ -2,22 +2,46 @@
 #include "ResourceIDs.h"
 
 ShipRace::ShipRace()
+	:obstaclesReset(false)
+	, currentPos(0, 0, 0)
+	, wallPosition(0.f, 20.f, 150.f)
+	, missingSide(0)
 {
-	//triangle = new Triangle();
-	//cube = new Cube();
-	//triGrid = new TriGrid(100, 100, 1.f);
-	//triGrid->SetPosition(5.f, 0.f, 0.f);
+	tunnel = new Tunnel();
+	ship = new Ship();
 
-	Tunnel* tunnel = new Tunnel();
-	Ship* ship = new Ship();
+	cube1 = new CubeWall();
+	cube1->SetPosition(1.f, 0.25f, 150.0f);
+	cubeWallArray.push_back(cube1);
 
+	cube2 = new CubeWall();
+	cube2->SetPosition(1.f, -0.75f, 150.0f);
+	cube2->SetRotationZ(15.f);
+	cubeWallArray.push_back(cube2);
+
+	cube3 = new CubeWall();
+	cube3->SetPosition(0.f, -1.0f, 150.0f);
+	cubeWallArray.push_back(cube3);
+
+	cube4 = new CubeWall();
+	cube4->SetPosition(-1.f, -0.75f, 150.0f);
+	cube4->SetRotationZ(-15.f);
+	cubeWallArray.push_back(cube4);
+
+	cube5 = new CubeWall();
+	cube5->SetPosition(-1.f, 0.25f, 150.0f);
+	cubeWallArray.push_back(cube5);
+
+	cubeMeasure = new CubeWall();
+	cubeMeasure->SetPosition(0.f, 20.f, 150.f);
+	MissingObstacle();
+
+	srand(time(0));
 }
 
 ShipRace::~ShipRace()
 {
-	//delete triangle;
-	//delete cube;
-	//delete triGrid;
+
 }
 
 void ShipRace::Start()
@@ -27,9 +51,7 @@ void ShipRace::Start()
 
 void ShipRace::Update()
 {
-	//static float rotation = 0;
-	//rotation += 0.00001;
-	//triGrid->SetRotation(rotation);
+
 }
 
 void ShipRace::Draw()
@@ -40,4 +62,25 @@ void ShipRace::Draw()
 void ShipRace::Stop()
 {
 
+}
+
+void ShipRace::MissingObstacle()
+{
+	missingSide = rand() % 5;
+
+	for (int i = 0; i < cubeWallArray.size(); i++)
+	{
+		if (i == missingSide)
+		{
+			cubeWallArray[i]->SetMissingSide(true);
+			currentPos = cubeWallArray[i]->GetPosition();
+			//cubeWallArray[i]->SetPosition(currentPos.x, currentPos.y, 150);
+		}
+		else
+		{
+			cubeWallArray[i]->SetMissingSide(false);
+			currentPos = cubeWallArray[i]->GetPosition();
+			//cubeWallArray[i]->SetPosition(currentPos.x, currentPos.y, 150);
+		}
+	}
 }

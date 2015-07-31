@@ -1,6 +1,7 @@
 #pragma once
 
 #include "PrimitiveModel.h"
+#include "CubeWall.h"
 
 class Ship
 	: PrimitiveModel
@@ -12,6 +13,8 @@ public:
 	void Update();
 	void ShipInput();
 	void ShipGravity(float angle);
+
+	void ResetObstacles();
 
 private:
 	const float SPEED;

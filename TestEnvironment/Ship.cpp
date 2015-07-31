@@ -9,7 +9,7 @@ Ship::Ship()
 	, shipAngle(0.f)
 	, DEFAULT_GRAVITY(0.01f)
 {
-	SetPosition(0.f, 0.f, 0.f);
+	SetPosition(0.f, 0.f, -30.f);
 	gravity = DEFAULT_GRAVITY;
 }
 
